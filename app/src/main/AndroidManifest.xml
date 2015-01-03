@@ -6,10 +6,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".List"
-            android:label="@string/app_name">
+            android:name=".ListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,12 +18,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Article"
+            android:name=".ArticleActivity"
             android:label="@string/title_activity_article"
-            android:parentActivityName=".List" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.northlinuxpioneers.arash.medicalarticles.List" />
+                android:value=".ListActivity" />
         </activity>
     </application>
 

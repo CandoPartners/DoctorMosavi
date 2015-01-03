@@ -1,52 +1,46 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.northlinuxpioneers.arash.medicalarticles.Article">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        >
+        <ImageView
+            android:id="@+id/articleImageHolder"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#333"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ccc"/>
 
+        <com.northlinuxpioneers.arash.medicalarticles.widget.PersianTextView
+            android:id="@+id/articleTitleHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="16sp"
+            android:textColor="#333"
+            android:paddingRight="16dp"
+            android:visibility="gone"/>
+        <com.northlinuxpioneers.arash.medicalarticles.widget.PersianTextView
+            android:id="@+id/articleTextHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:gravity="right"
+            android:textColor="#a333"
+            android:textSize="14sp" />
 
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
-
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/articleTitleHolder"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="right" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/articleImageHolder"
-                android:layout_below="@+id/articleTitleHolder"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/articleTextHolder"
-                android:layout_below="@+id/articleImageHolder"
-                android:layout_centerHorizontal="true"
-                android:gravity="right"
-                android:textSize="16sp"
-                android:textColor="#F333"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"/>
-
-            </RelativeLayout>
-    </ScrollView>
-
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,19 +1,14 @@
 package com.northlinuxpioneers.arash.medicalarticles;
 
-import android.annotation.TargetApi;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 
-
-public class Article extends ActionBarActivity {
+public class ArticleActivity extends ActionBarActivity {
 
     private TextView articleTitleHolder;
     private ImageView articleImageHolder;
@@ -34,7 +29,7 @@ public class Article extends ActionBarActivity {
         articleImageHolder = (ImageView) findViewById(R.id.articleImageHolder);
         articleTextHolder = (TextView) findViewById(R.id.articleTextHolder);
 
-        getData(List.getItems(), articleID);
+        getData(ListActivity.getItems(), articleID);
     }
 
     private Item getData(Item[] items, int id)
@@ -49,33 +44,7 @@ public class Article extends ActionBarActivity {
 
         articleTitleHolder.setText(items[0].getTitle());
         articleImageHolder.setImageURI(Uri.parse(items[0].getPicURL()));
-
-        // file to input stream
-        InputStream input = null;
-        int size = 0;
-        try {
-            input = getAssets().open(
-                    "first_text.txt");
-            size = input.available();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // myData.txt can't be more than 2 gigs.
-        byte[] buffer = new byte[size];
-        try {
-            input.read(buffer);
-            input.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        // byte buffer into a string
-        String string = new String(buffer);
-
-        temp.setText(string);
-
+        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this));
         articleTextHolder.setText(temp.getText());
 
         //////////////////////////////////////////////

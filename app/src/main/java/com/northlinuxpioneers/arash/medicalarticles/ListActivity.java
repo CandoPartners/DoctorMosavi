@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class List extends ActionBarActivity {
+public class ListActivity extends ActionBarActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -105,6 +105,8 @@ public class List extends ActionBarActivity {
 
             // define views that are inside the view_holder : public
             public TextView articleName;
+            public TextView articleDetail;
+            public TextView button;
             public ImageView articleImage;
 
             public ViewHolder(View v) {
@@ -112,6 +114,8 @@ public class List extends ActionBarActivity {
 
                 // initialize views inside the view_holder
                 articleName = (TextView) v.findViewById(R.id.articleName);
+                articleDetail = (TextView) v.findViewById(R.id.articleDetail);
+                button = (TextView) v.findViewById(R.id.button);
                 articleImage = (ImageView) v.findViewById(R.id.articleImage);
             }
         }
@@ -133,9 +137,9 @@ public class List extends ActionBarActivity {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), Article.class);
+                    Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
+//                    overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
                 }
             });
 
@@ -151,6 +155,7 @@ public class List extends ActionBarActivity {
 
             // code to assign data to different views inside the view_holder
             holder.articleName.setText(mDataset[position].getTitle());
+            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this));
             holder.articleImage.setImageURI(Uri.parse(mDataset[position].getPicURL()));
         }
 
