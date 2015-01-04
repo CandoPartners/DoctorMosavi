@@ -1,11 +1,18 @@
 package com.northlinuxpioneers.arash.medicalarticles;
 
+import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class ArticleActivity extends ActionBarActivity {
@@ -23,18 +30,57 @@ public class ArticleActivity extends ActionBarActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
         actionBar.setTitle(getResources().getString(R.string.author_name));
 
         articleTitleHolder = (TextView) findViewById(R.id.articleTitleHolder);
         articleImageHolder = (ImageView) findViewById(R.id.articleImageHolder);
         articleTextHolder = (TextView) findViewById(R.id.articleTextHolder);
 
-        getData(ListActivity.getItems(), articleID);
+        articleID = getIntent().getExtras().getInt("articleID");
+
+        getData(articleID);
     }
 
-    private Item getData(Item[] items, int id)
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("articleID", articleID);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        articleID = savedInstanceState.getInt("articleID");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    private Item getData(int id)
     {
-        Item temp = items[id];
+        Item[] articles = new Item[2];
+
+        // code for getting the articles
+
+        //////////////////////////////////////////////
+
+        // at the moment, we have only ONE item in the list
+
+        Item first = new Item();
+        first.setId(0);
+        first.setTitle(getResources().getString(R.string.firstItem));
+        first.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        articles[0] = first;
+
+        Item second = new Item();
+        second.setId(1);
+        second.setTitle(getResources().getString(R.string.secondItem));
+        second.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        articles[1] = second;
+
+        //////////////////////////////////////////////
+
+        Item temp = articles[id];
 
         // code for setting item text
 
@@ -42,14 +88,26 @@ public class ArticleActivity extends ActionBarActivity {
 
         // at the moment, we have only ONE item in the list
 
-        articleTitleHolder.setText(items[0].getTitle());
-        articleImageHolder.setImageURI(Uri.parse(items[0].getPicURL()));
-        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this));
+        articleTitleHolder.setText(temp.getTitle());
+        articleImageHolder.setImageURI(Uri.parse(temp.getPicURL()));
+        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID));
+//        temp.setText(getResources().getString(R.string.first_text));
         articleTextHolder.setText(temp.getText());
 
         //////////////////////////////////////////////
 
         return temp;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.slide_out_right,R.anim.slide_in_left);
+                return true;
+        }
+        return false;
     }
 
     //    @Override

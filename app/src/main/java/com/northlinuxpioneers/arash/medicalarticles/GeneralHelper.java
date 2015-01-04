@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class GeneralHelper {
-    public static String getArticleFromAssets(Context context) {
+    public static String getArticleFromAssets(Context context, int id) {
         // file to input stream
         InputStream input = null;
         int size = 0;
         try {
-            input = context.getAssets().open(
-                    "first_text.txt");
+            input = context.getAssets().open(id +
+                    ".txt");
             size = input.available();
         } catch (IOException e) {
         }

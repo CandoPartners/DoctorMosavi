@@ -2,6 +2,7 @@ package com.northlinuxpioneers.arash.medicalarticles;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,8 +20,7 @@ public class ListActivity extends ActionBarActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
-    private static Item[] items;
+    private Item[] items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,9 @@ public class ListActivity extends ActionBarActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.listArticles);
 
@@ -47,7 +50,7 @@ public class ListActivity extends ActionBarActivity {
 
     private Item[] getData()
     {
-        Item[] articles = new Item[1];
+        Item[] articles = new Item[2];
 
         // code for getting the articles
 
@@ -61,16 +64,17 @@ public class ListActivity extends ActionBarActivity {
         first.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
         articles[0] = first;
 
+        Item second = new Item();
+        second.setId(1);
+        second.setTitle(getResources().getString(R.string.secondItem));
+        second.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        articles[1] = second;
+
         //////////////////////////////////////////////
 
         items = articles;
 
         return articles;
-    }
-
-    public static Item[] getItems()
-    {
-        return items;
     }
 
 //    @Override
@@ -108,6 +112,7 @@ public class ListActivity extends ActionBarActivity {
             public TextView articleDetail;
             public TextView button;
             public ImageView articleImage;
+            public int id;
 
             public ViewHolder(View v) {
                 super(v);
@@ -117,6 +122,16 @@ public class ListActivity extends ActionBarActivity {
                 articleDetail = (TextView) v.findViewById(R.id.articleDetail);
                 button = (TextView) v.findViewById(R.id.button);
                 articleImage = (ImageView) v.findViewById(R.id.articleImage);
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
+                        intent.putExtra("articleID", id);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
+                    }
+                });
             }
         }
 
@@ -134,15 +149,6 @@ public class ListActivity extends ActionBarActivity {
                     .inflate(R.layout.list_item, parent, false);
             // set the view's size, margins, paddings and layout parameters
 
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
-                    startActivity(intent);
-//                    overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
-                }
-            });
-
             ViewHolder vh = new ViewHolder(v);
             return vh;
         }
@@ -155,8 +161,9 @@ public class ListActivity extends ActionBarActivity {
 
             // code to assign data to different views inside the view_holder
             holder.articleName.setText(mDataset[position].getTitle());
-            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this));
+            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this, 0));
             holder.articleImage.setImageURI(Uri.parse(mDataset[position].getPicURL()));
+            holder.id = items[position].getId();
         }
 
         // Return the size of your dataset (invoked by the layout manager)

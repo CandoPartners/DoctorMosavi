@@ -6,7 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_list">List</string>
     <string name="title_activity_article">Article</string>
-    <string name="firstItem">رشد جنسی در فرزندان</string>
+    <string name="firstItem">رشد جنسی در فرزندان (بخش اول)</string>
+    <string name="secondItem">رشد جنسی در فرزندان (بخش دوم)</string>
     <string name="author_name">دکتر موسوی</string>
 
 </resources>
