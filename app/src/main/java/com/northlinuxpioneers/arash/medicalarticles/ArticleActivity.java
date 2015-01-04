@@ -2,6 +2,7 @@ package com.northlinuxpioneers.arash.medicalarticles;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 
 public class ArticleActivity extends ActionBarActivity {
@@ -56,7 +58,30 @@ public class ArticleActivity extends ActionBarActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    private Item getData(int id)
+    private class DataLoaderTask extends AsyncTask<Object, Integer, Long> {
+
+        Item articlebla;
+
+        protected Long doInBackground(Object... params) {
+            Item article = (Item) params[0];
+            int identifier = (int) params[1];
+
+            article.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, identifier));
+            articlebla = article;
+
+            return 1L;
+        }
+
+        protected void onProgressUpdate(Integer progress) {
+
+        }
+
+        protected void onPostExecute(Long result) {
+            articleTextHolder.setText(articlebla.getText());
+        }
+    }
+
+    private void getData(int id)
     {
         Item[] articles = new Item[2];
 
@@ -90,13 +115,14 @@ public class ArticleActivity extends ActionBarActivity {
 
         articleTitleHolder.setText(temp.getTitle());
         articleImageHolder.setImageURI(Uri.parse(temp.getPicURL()));
-        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID));
-//        temp.setText(getResources().getString(R.string.first_text));
-        articleTextHolder.setText(temp.getText());
+//        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID));
+        Object[] paramsBundle = new Object[2];
+        paramsBundle[0] = temp;
+        paramsBundle[1] = id;
+        new DataLoaderTask().execute(paramsBundle);
+//        articleTextHolder.setText(temp.getText());
 
         //////////////////////////////////////////////
-
-        return temp;
     }
 
     @Override
