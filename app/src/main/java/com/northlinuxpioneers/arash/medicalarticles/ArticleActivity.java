@@ -4,12 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -58,28 +63,18 @@ public class ArticleActivity extends ActionBarActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    private class DataLoaderTask extends AsyncTask<Object, Integer, Long> {
-
-        Item articlebla;
-
-        protected Long doInBackground(Object... params) {
-            Item article = (Item) params[0];
-            int identifier = (int) params[1];
-
-            article.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, identifier));
-            articlebla = article;
-
-            return 1L;
+    /*private class DataLoaderTask extends AsyncTask<Integer, Integer, String> {
+        protected String doInBackground(Integer... id) {
+            return
         }
 
-        protected void onProgressUpdate(Integer progress) {
-
+        protected void onPostExecute(String result) {
+            Animation animation = new AlphaAnimation(0,1f);
+            animation.setDuration(1000);
+            articleTextHolder.setText(result);
+            articleTextHolder.startAnimation(animation);
         }
-
-        protected void onPostExecute(Long result) {
-            articleTextHolder.setText(articlebla.getText());
-        }
-    }
+    }*/
 
     private void getData(int id)
     {
@@ -116,15 +111,29 @@ public class ArticleActivity extends ActionBarActivity {
         articleTitleHolder.setText(temp.getTitle());
         articleImageHolder.setImageURI(Uri.parse(temp.getPicURL()));
 //        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID));
-        Object[] paramsBundle = new Object[2];
-        paramsBundle[0] = temp;
-        paramsBundle[1] = id;
-        new DataLoaderTask().execute(paramsBundle);
+//        new DataLoaderTask().execute(id);
 //        articleTextHolder.setText(temp.getText());
-
+        handler.postDelayed(runnable, 100);
         //////////////////////////////////////////////
     }
 
+
+    Handler handler  = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            final String articleFromAssets = GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID, 20000);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Animation animation = new AlphaAnimation(0,1f);
+                    animation.setDuration(1000);
+                    articleTextHolder.setText(Html.fromHtml(articleFromAssets));
+                    articleTextHolder.startAnimation(animation);
+                }
+            });
+        }
+    };
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -134,6 +143,12 @@ public class ArticleActivity extends ActionBarActivity {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_out_right,R.anim.slide_in_left);
     }
 
     //    @Override

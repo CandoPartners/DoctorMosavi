@@ -7,7 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:layout_marginTop="4dp">
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -43,7 +45,7 @@
             android:textColor="#a333"
             android:maxLines="7"
             />
-        <com.northlinuxpioneers.arash.medicalarticles.widget.PersianTextView
+        <!--<com.northlinuxpioneers.arash.medicalarticles.widget.PersianTextView
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -52,7 +54,7 @@
             android:textColor="#fff"
             android:text="ادامه مطلب"
             android:background="?colorPrimary"
-            />
+            />-->
     </LinearLayout>
 </android.support.v7.widget.CardView>
 

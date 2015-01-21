@@ -28,10 +28,10 @@ public class PersianTextView extends TextView {
         setTypeface(FontHelper.getInstance(context).getPersianTextTypeface());
     }
 
-    @Override
+   /* @Override
     public void setText(CharSequence text, BufferType type) {
         if (text != null)
             text = FormatHelper.toPersianNumber(text.toString());
-        super.setText(text, type);
-    }
+        super.setText(Html.fromHtml(text.toString()), type);
+    }*/
 }

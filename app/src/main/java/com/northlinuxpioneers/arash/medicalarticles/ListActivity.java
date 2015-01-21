@@ -120,10 +120,10 @@ public class ListActivity extends ActionBarActivity {
                 // initialize views inside the view_holder
                 articleName = (TextView) v.findViewById(R.id.articleName);
                 articleDetail = (TextView) v.findViewById(R.id.articleDetail);
-                button = (TextView) v.findViewById(R.id.button);
+//                button = (TextView) v.findViewById(R.id.button);
                 articleImage = (ImageView) v.findViewById(R.id.articleImage);
 
-                button.setOnClickListener(new View.OnClickListener() {
+                v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
@@ -161,7 +161,7 @@ public class ListActivity extends ActionBarActivity {
 
             // code to assign data to different views inside the view_holder
             holder.articleName.setText(mDataset[position].getTitle());
-            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this, 0));
+            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this, position,300));
             holder.articleImage.setImageURI(Uri.parse(mDataset[position].getPicURL()));
             holder.id = items[position].getId();
         }
