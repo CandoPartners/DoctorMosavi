@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 public class GeneralHelper {
-    public static String getArticleFromAssets(Context context, int id,int limit) {
+    public static String getArticleFromAssets(Context context, String id) {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new InputStreamReader(context.getAssets().open(id +".txt"), Charset.forName("UTF-8")));
@@ -18,7 +18,7 @@ public class GeneralHelper {
         int c;
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            while((c = reader.read()) != -1 && stringBuilder.length()<limit) {
+            while((c = reader.read()) != -1) {
                 char character = (char) c;
                 stringBuilder.append(character);
             }

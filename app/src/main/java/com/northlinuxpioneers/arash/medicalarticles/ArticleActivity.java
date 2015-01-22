@@ -37,9 +37,9 @@ public class ArticleActivity extends ActionBarActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+       /* if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-        }
+        }*/
         actionBar.setTitle(getResources().getString(R.string.author_name));
 
         articleTitleHolder = (TextView) findViewById(R.id.articleTitleHolder);
@@ -78,7 +78,7 @@ public class ArticleActivity extends ActionBarActivity {
 
     private void getData(int id)
     {
-        Item[] articles = new Item[2];
+        Item[] articles = new Item[3];
 
         // code for getting the articles
 
@@ -97,6 +97,12 @@ public class ArticleActivity extends ActionBarActivity {
         second.setTitle(getResources().getString(R.string.secondItem));
         second.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
         articles[1] = second;
+
+        Item three = new Item();
+        three.setId(2);
+        three.setTitle(getResources().getString(R.string.threeItem));
+        three.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        articles[2] = three;
 
         //////////////////////////////////////////////
 
@@ -122,7 +128,7 @@ public class ArticleActivity extends ActionBarActivity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            final String articleFromAssets = GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID, 20000);
+            final String articleFromAssets = GeneralHelper.getArticleFromAssets(ArticleActivity.this, String.valueOf(articleID));
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

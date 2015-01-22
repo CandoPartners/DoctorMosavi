@@ -50,7 +50,7 @@ public class ListActivity extends ActionBarActivity {
 
     private Item[] getData()
     {
-        Item[] articles = new Item[2];
+        Item[] articles = new Item[3];
 
         // code for getting the articles
 
@@ -69,6 +69,12 @@ public class ListActivity extends ActionBarActivity {
         second.setTitle(getResources().getString(R.string.secondItem));
         second.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
         articles[1] = second;
+
+        Item three = new Item();
+        three.setId(2);
+        three.setTitle(getResources().getString(R.string.threeItem));
+        three.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        articles[2] = three;
 
         //////////////////////////////////////////////
 
@@ -161,7 +167,7 @@ public class ListActivity extends ActionBarActivity {
 
             // code to assign data to different views inside the view_holder
             holder.articleName.setText(mDataset[position].getTitle());
-            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this, position,300));
+            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this, position+"titles"));
             holder.articleImage.setImageURI(Uri.parse(mDataset[position].getPicURL()));
             holder.id = items[position].getId();
         }
