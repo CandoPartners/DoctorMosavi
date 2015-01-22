@@ -32,6 +32,6 @@ public class PersianTextView extends TextView {
     public void setText(CharSequence text, BufferType type) {
         if (text != null)
             text = FormatHelper.toPersianNumber(text.toString());
-        super.setText(Html.fromHtml(text.toString()), type);
+        super.setText(text, type);
     }*/
 }
