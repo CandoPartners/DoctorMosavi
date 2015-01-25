@@ -1,4 +1,4 @@
-package com.northlinuxpioneers.arash.medicalarticles;
+package com.ada.koyePishGiri;
 
 import android.content.Context;
 

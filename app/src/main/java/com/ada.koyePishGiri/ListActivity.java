@@ -1,4 +1,4 @@
-package com.northlinuxpioneers.arash.medicalarticles;
+package com.ada.koyePishGiri;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,14 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.ada.koyePishGiri.Article;
 
 public class ListActivity extends ActionBarActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Item[] items;
+    private Article[] Articles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +48,9 @@ public class ListActivity extends ActionBarActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private Item[] getData()
+    private Article[] getData()
     {
-        Item[] articles = new Item[3];
+        Article[] articles = new Article[3];
 
         // code for getting the articles
 
@@ -58,34 +58,34 @@ public class ListActivity extends ActionBarActivity {
 
         // at the moment, we have only ONE item in the list
 
-        Item first = new Item();
+        Article first = new Article();
         first.setId(0);
         first.setTitle(getResources().getString(R.string.firstItem));
-        first.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        first.setPicURL("android.resource://com.ada.koyePishGiri/raw/b1");
         articles[0] = first;
 
-        Item second = new Item();
+        Article second = new Article();
         second.setId(1);
         second.setTitle(getResources().getString(R.string.secondItem));
-        second.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        second.setPicURL("android.resource://com.ada.koyePishGiri/raw/b2");
         articles[1] = second;
 
-        Item three = new Item();
+        Article three = new Article();
         three.setId(2);
         three.setTitle(getResources().getString(R.string.threeItem));
-        three.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        three.setPicURL("android.resource://com.ada.koyePishGiri/raw/b3");
         articles[2] = three;
 
         //////////////////////////////////////////////
 
-        items = articles;
+        Articles = articles;
 
         return articles;
     }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
+//        // Inflate the menu; this adds Articles to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_list, menu);
 //        return true;
 //    }
@@ -106,10 +106,10 @@ public class ListActivity extends ActionBarActivity {
 //    }
 
     private class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-        private Item[] mDataset;
+        private Article[] mDataset;
 
         // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
+        // Complex data Articles may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
         public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -132,7 +132,7 @@ public class ListActivity extends ActionBarActivity {
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), com.ada.koyePishGiri.ArticleActivity.class);
                         intent.putExtra("articleID", id);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
@@ -142,7 +142,7 @@ public class ListActivity extends ActionBarActivity {
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public ListAdapter(Item[] items) {
+        public ListAdapter(Article[] items) {
             mDataset = items;
         }
 
@@ -167,9 +167,9 @@ public class ListActivity extends ActionBarActivity {
 
             // code to assign data to different views inside the view_holder
             holder.articleName.setText(mDataset[position].getTitle());
-            holder.articleDetail.setText(GeneralHelper.getArticleFromAssets(ListActivity.this, position+"titles"));
+            holder.articleDetail.setText(com.ada.koyePishGiri.GeneralHelper.getArticleFromAssets(ListActivity.this, position + "titles"));
             holder.articleImage.setImageURI(Uri.parse(mDataset[position].getPicURL()));
-            holder.id = items[position].getId();
+            holder.id = Articles[position].getId();
         }
 
         // Return the size of your dataset (invoked by the layout manager)

@@ -1,25 +1,17 @@
-package com.northlinuxpioneers.arash.medicalarticles;
+package com.ada.koyePishGiri;
 
-import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import com.ada.koyePishGiri.Article;
 
 
 public class ArticleActivity extends ActionBarActivity {
@@ -78,7 +70,7 @@ public class ArticleActivity extends ActionBarActivity {
 
     private void getData(int id)
     {
-        Item[] articles = new Item[3];
+        com.ada.koyePishGiri.Article[] articles = new Article[3];
 
         // code for getting the articles
 
@@ -86,27 +78,27 @@ public class ArticleActivity extends ActionBarActivity {
 
         // at the moment, we have only ONE item in the list
 
-        Item first = new Item();
+        Article first = new Article();
         first.setId(0);
         first.setTitle(getResources().getString(R.string.firstItem));
-        first.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        first.setPicURL("android.resource://com.ada.koyePishGiri/raw/b1");
         articles[0] = first;
 
-        Item second = new Item();
+        Article second = new Article();
         second.setId(1);
         second.setTitle(getResources().getString(R.string.secondItem));
-        second.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        second.setPicURL("android.resource://com.ada.koyePishGiri/raw/b2");
         articles[1] = second;
 
-        Item three = new Item();
+        Article three = new Article();
         three.setId(2);
         three.setTitle(getResources().getString(R.string.threeItem));
-        three.setPicURL("android.resource://com.northlinuxpioneers.arash.medicalarticles/raw/first_pic");
+        three.setPicURL("android.resource://com.ada.koyePishGiri/raw/b3");
         articles[2] = three;
 
         //////////////////////////////////////////////
 
-        Item temp = articles[id];
+        Article temp = articles[id];
 
         // code for setting item text
 
@@ -128,7 +120,7 @@ public class ArticleActivity extends ActionBarActivity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            final String articleFromAssets = GeneralHelper.getArticleFromAssets(ArticleActivity.this, String.valueOf(articleID));
+            final String articleFromAssets = com.ada.koyePishGiri.GeneralHelper.getArticleFromAssets(ArticleActivity.this, String.valueOf(articleID));
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

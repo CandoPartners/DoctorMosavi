@@ -25,7 +25,7 @@ public class PersianTextView extends TextView {
     }
 
     private void init(Context context) {
-        setTypeface(FontHelper.getInstance(context).getPersianTextTypeface());
+        setTypeface(com.northlinuxpioneers.arash.medicalarticles.widget.FontHelper.getInstance(context).getPersianTextTypeface());
     }
 
    /* @Override

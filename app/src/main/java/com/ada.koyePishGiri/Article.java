@@ -1,9 +1,7 @@
-package com.northlinuxpioneers.arash.medicalarticles;
+package com.ada.koyePishGiri;
 
-/**
- * Created by Arash on 1/3/2015.
- */
-public class Item {
+
+public class Article {
     private int id;
     private String title;
     private String text;
