@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -83,27 +85,23 @@ public class ListActivity extends ActionBarActivity {
         return articles;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds Articles to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_list, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            startActivity(new Intent(ListActivity.this,AboutActivity.class));
+            overridePendingTransition(R.anim.slide_out_left,R.anim.slide_in_right);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         private Article[] mDataset;

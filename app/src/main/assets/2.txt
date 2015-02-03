@@ -117,11 +117,9 @@
 <p style="direction: rtl;">&bull;&nbsp;اطلاع در مورد اینکه وقتی با دکتر ملاقات می کنند چه انتظاری از وی داشته باشند .</p>
 
 <p style="direction: rtl;">&nbsp;</p>
+<p><strong><span dir="RTL">تهیه و جمع آوری :</strong> بتول موسوی </span></p>
 
-<p><strong><span dir="RTL">منبع :&nbsp;</span></strong></p>
+<p><strong><span dir="RTL">منبع :&nbsp;</strong>&nbsp;Hickling, M.(2008).The New Speaking of Sex. Northstone: kelowna, BC</span></p>
 
-<p style="direction: rtl;">&nbsp;Hickling, M.(2008).The New Speaking of Sex. Northstone: kelowna, BC</p>
 
-<p style="direction: rtl;">&nbsp;</p>
 
-<p>&nbsp;</p>

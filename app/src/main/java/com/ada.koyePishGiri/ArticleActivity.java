@@ -29,10 +29,6 @@ public class ArticleActivity extends ActionBarActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-       /* if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-        }*/
-        actionBar.setTitle(getResources().getString(R.string.author_name));
 
         articleTitleHolder = (TextView) findViewById(R.id.articleTitleHolder);
         articleImageHolder = (ImageView) findViewById(R.id.articleImageHolder);
@@ -108,9 +104,8 @@ public class ArticleActivity extends ActionBarActivity {
 
         articleTitleHolder.setText(temp.getTitle());
         articleImageHolder.setImageURI(Uri.parse(temp.getPicURL()));
-//        temp.setText(GeneralHelper.getArticleFromAssets(ArticleActivity.this, articleID));
-//        new DataLoaderTask().execute(id);
-//        articleTextHolder.setText(temp.getText());
+        getSupportActionBar().setTitle(temp.getTitle());
+
         handler.postDelayed(runnable, 100);
         //////////////////////////////////////////////
     }
@@ -149,25 +144,4 @@ public class ArticleActivity extends ActionBarActivity {
         overridePendingTransition(R.anim.slide_out_right,R.anim.slide_in_left);
     }
 
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_article, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }
