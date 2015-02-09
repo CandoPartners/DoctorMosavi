@@ -74,4 +74,3 @@
 
 <p style="direction: rtl;">&bull;&nbsp;برنامه ریزی برای آینده در این دوره شکل می گیرد .&nbsp;</p>
 
-<p><strong><span dir="RTL">تهیه و جمع آوری :</strong> بتول موسوی </span></p>

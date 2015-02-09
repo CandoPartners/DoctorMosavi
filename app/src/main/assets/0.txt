@@ -104,4 +104,3 @@
 
 <p style="direction: rtl;">&nbsp;</p>
 
-<p><strong><span dir="RTL">تهیه و جمع آوری :</strong> بتول موسوی </span></p>
